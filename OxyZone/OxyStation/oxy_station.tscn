@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://caglxjmrlyo3c"]
+
+[ext_resource type="PackedScene" uid="uid://dco6pacjsi1pw" path="res://OxyZone/oxy_zone.tscn" id="1_n8xo4"]
+[ext_resource type="Texture2D" uid="uid://dadlydqu86ae" path="res://Assets/oxy_station.png" id="2_mjvtv"]
+
+[node name="OxyStation" instance=ExtResource("1_n8xo4")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(-0.5, 0)
+
+[node name="OxyStation" type="Sprite2D" parent="." index="1"]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_mjvtv")

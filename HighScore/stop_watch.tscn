@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://6o50442lorwv"]
+
+[ext_resource type="Script" path="res://spaceman/StopWatch.gd" id="1_yj6gt"]
+[ext_resource type="AudioStream" uid="uid://bqbqimdvcpw54" path="res://Assets/Music/soundscrate-anticipation.mp3" id="2_u067m"]
+[ext_resource type="AudioStream" uid="uid://b67bfvl52g25e" path="res://Assets/Music/fading_away.mp3" id="3_4ooky"]
+
+[node name="StopWatch" type="Node"]
+script = ExtResource("1_yj6gt")
+
+[node name="Menu" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_u067m")
+volume_db = -15.0
+
+[node name="Game" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4ooky")
+volume_db = -15.0

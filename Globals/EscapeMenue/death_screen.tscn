@@ -1,0 +1,45 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxpba0qmy1paj"]
+
+[ext_resource type="Script" path="res://DeathScreen/death_screen.gd" id="1_x27u1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ghthv"]
+bg_color = Color(1, 1, 1, 0.203922)
+
+[node name="DeathScreen" type="CanvasLayer"]
+visible = false
+script = ExtResource("1_x27u1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -29.5
+offset_right = 48.0
+offset_bottom = 29.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="YouDied" type="Label" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Game Pased"
+
+[node name="ReplayButton" type="Button" parent="ColorRect/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_ghthv")
+text = "Re:Play"
+
+[connection signal="pressed" from="ColorRect/VBoxContainer/ReplayButton" to="." method="_on_replay_button_pressed"]

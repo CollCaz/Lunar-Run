@@ -1,0 +1,60 @@
+[gd_scene load_steps=5 format=3 uid="uid://b18dmc5son0q8"]
+
+[ext_resource type="Script" path="res://Globals/EndScene/EndScene.gd" id="1_i20vp"]
+[ext_resource type="Texture2D" uid="uid://3xq73tpt7j6m" path="res://Assets/title_screen_bg.png" id="2_l884p"]
+[ext_resource type="PackedScene" uid="uid://dtnjgy63lsnaf" path="res://HighScore/high_score.tscn" id="3_14xos"]
+[ext_resource type="Script" path="res://Globals/MainMenu/CurrentScore.gd" id="4_ha1k3"]
+
+[node name="EndScene" type="Node2D"]
+script = ExtResource("1_i20vp")
+
+[node name="TitleScreenBg" type="Sprite2D" parent="."]
+position = Vector2(576, 323.5)
+scale = Vector2(8.98437, 5.07031)
+texture = ExtResource("2_l884p")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -2.0
+offset_top = -1.0
+offset_right = 1153.0
+offset_bottom = 651.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -376.0
+offset_top = -198.5
+offset_right = 376.0
+offset_bottom = 70.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 70
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Game Over
+Thanks for Playing!"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.470588, 0.447059, 0.772549, 1)
+text = "Return to Menu
+"
+
+[node name="HighScore" parent="Panel/VBoxContainer" instance=ExtResource("3_14xos")]
+layout_mode = 2
+text = "Best Time"
+
+[node name="CurrentScore" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_ha1k3")
+
+[connection signal="pressed" from="Panel/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

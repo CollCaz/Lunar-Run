@@ -1,0 +1,9 @@
+res://spaceman/spaceman.tscn
+res://Globals/LevelDone/level_done.tscn
+res://levels/Level1.tscn
+res://levels/Level5.tscn
+res://levels/Level2.tscn
+res://Globals/EndScene/EndScene.tscn
+res://HighScore/high_score.tscn
+res://HighScore/stop_watch.tscn
+res://Globals/MainMenu/MainMenu.tscn

@@ -1,0 +1,236 @@
+[gd_scene load_steps=16 format=3 uid="uid://dyus4dory1nki"]
+
+[ext_resource type="Script" path="res://spaceman/spaceman.gd" id="1_ronjc"]
+[ext_resource type="Texture2D" uid="uid://bco3kc4nn3asy" path="res://Assets/Astronaut_Idle.png" id="2_rw5h1"]
+[ext_resource type="Texture2D" uid="uid://sw5rjn8foa27" path="res://Assets/Astronaut_Death.png" id="4_3bklf"]
+[ext_resource type="Texture2D" uid="uid://fx14a44str2w" path="res://Assets/Astronaut_Jump.png" id="5_ne065"]
+[ext_resource type="PackedScene" uid="uid://bmuh3ovdmvqww" path="res://Globals/OxyLevel/oxy_level.tscn" id="5_qtmso"]
+[ext_resource type="Script" path="res://Globals/OxyLevel/oxy_level.gd" id="6_i0hwa"]
+[ext_resource type="PackedScene" uid="uid://cduk8wm1bvq1f" path="res://Globals/EscapeMenue/escape_menu.tscn" id="7_h2gfm"]
+[ext_resource type="Script" path="res://spaceman/CurrentTime.gd" id="7_whnqn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wufb5"]
+size = Vector2(30, 36)
+
+[sub_resource type="Animation" id="Animation_6hkki"]
+resource_name = "Death"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Death:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="Animation" id="Animation_llu03"]
+resource_name = "Fall"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Run:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_o7bsq"]
+resource_name = "Idle"
+length = 0.35
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_3xys7"]
+resource_name = "Jump"
+length = 0.07
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Run:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Run:frame_coords")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.07),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wuwq4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Animations/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Animations/Death:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Animations/Run:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Animations/Run:frame_coords")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sbr8b"]
+_data = {
+"Death": SubResource("Animation_6hkki"),
+"Fall": SubResource("Animation_llu03"),
+"Idle": SubResource("Animation_o7bsq"),
+"Jump": SubResource("Animation_3xys7"),
+"RESET": SubResource("Animation_wuwq4")
+}
+
+[node name="Spaceman" type="CharacterBody2D"]
+z_index = 4
+script = ExtResource("1_ronjc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_wufb5")
+debug_color = Color(0, 0.207843, 0.25098, 0.419608)
+
+[node name="Animations" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Idle" type="Sprite2D" parent="Animations"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+position = Vector2(0, -2.38419e-07)
+scale = Vector2(2.29167, 2.20833)
+texture = ExtResource("2_rw5h1")
+hframes = 6
+
+[node name="Death" type="Sprite2D" parent="Animations"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+position = Vector2(1, 1)
+scale = Vector2(2.125, 2.125)
+texture = ExtResource("4_3bklf")
+hframes = 4
+
+[node name="Run" type="Sprite2D" parent="Animations"]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(2.25, 2.25)
+texture = ExtResource("5_ne065")
+hframes = 5
+
+[node name="OxyTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 10.0
+autostart = true
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+autoplay = "Idle"
+speed_scale = 0.6
+libraries = {
+"": SubResource("AnimationLibrary_sbr8b")
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OxyLevel" parent="CanvasLayer" instance=ExtResource("5_qtmso")]
+modulate = Color(0, 0.533333, 0.941176, 1)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -139.0
+offset_top = 23.0
+offset_right = -29.0
+offset_bottom = 50.0
+grow_horizontal = 2
+max_value = 10.0
+value = 10.0
+script = ExtResource("6_i0hwa")
+
+[node name="CurrentTime" type="Label" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_top = 24.0
+offset_right = -24.0
+offset_bottom = 47.0
+grow_horizontal = 0
+script = ExtResource("7_whnqn")
+
+[node name="EscapeMenu" parent="." instance=ExtResource("7_h2gfm")]
+
+[connection signal="timeout" from="OxyTimer" to="." method="_on_oxy_timer_timeout"]

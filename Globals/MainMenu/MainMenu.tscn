@@ -1,0 +1,61 @@
+[gd_scene load_steps=5 format=3 uid="uid://3qj1h48jqqlm"]
+
+[ext_resource type="Script" path="res://Globals/MainMenu/MainMenu.gd" id="1_624ul"]
+[ext_resource type="Texture2D" uid="uid://3xq73tpt7j6m" path="res://Assets/title_screen_bg.png" id="1_rv0lg"]
+[ext_resource type="PackedScene" uid="uid://dtnjgy63lsnaf" path="res://HighScore/high_score.tscn" id="3_xyh5n"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_278ah"]
+font_size = 48
+font_color = Color(0.113725, 0.462745, 0.647059, 1)
+outline_size = 4
+outline_color = Color(0.0392157, 0.0235294, 0.12549, 1)
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_624ul")
+
+[node name="TitleScreenBg" type="Sprite2D" parent="."]
+modulate = Color(0.647059, 0.647059, 0.647059, 1)
+position = Vector2(576.5, 324.5)
+scale = Vector2(8.99219, 5.05469)
+texture = ExtResource("1_rv0lg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.5
+offset_top = 139.0
+offset_right = 156.5
+offset_bottom = 309.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="TitleName" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Lunar Station
+Run"
+label_settings = SubResource("LabelSettings_278ah")
+horizontal_alignment = 1
+
+[node name="BestTime" parent="VBoxContainer" instance=ExtResource("3_xyh5n")]
+layout_mode = 2
+text = "Best Time"
+
+[node name="Buttons" type="Node" parent="VBoxContainer"]
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/Buttons"]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.352
+anchor_right = 0.5
+anchor_bottom = 0.352
+offset_left = -85.0
+offset_top = 112.904
+offset_right = 87.0
+offset_bottom = 165.904
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Play Game"
+
+[connection signal="button_up" from="VBoxContainer/Buttons/PlayButton" to="." method="_on_play_button_button_up"]

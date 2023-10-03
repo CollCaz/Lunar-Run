@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bmuh3ovdmvqww"]
+
+[node name="OxyLevel" type="ProgressBar"]
+modulate = Color(0.396078, 0.85098, 0.988235, 1)
+offset_left = 27.0
+offset_top = 33.0
+offset_right = 124.0
+offset_bottom = 60.0
+scale = Vector2(2.54449, 1.10039)
+tooltip_text = "
+"
+value = 100.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
